@@ -1,0 +1,29 @@
+{
+  "name": "funzaumu.vudrux.site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev --port 3001",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@bootstrap-vue-next/nuxt": "^0.17.2",
+    "better-sqlite3": "^9.5.0",
+    "bootstrap": "^5.3.3",
+    "bootstrap-vue-next": "^0.17.2",
+    "from-exponential": "^1.1.1",
+    "knex": "^3.1.0",
+    "objection": "^3.1.4",
+    "svg-path-parser": "^1.1.0"
+  },
+  "devDependencies": {
+    "@types/svg-path-parser": "^1.1.6",
+    "nuxt": "^3.9.3",
+    "typescript": "^5.4.5",
+    "vue": "^3.4.14",
+    "vue-router": "^4.2.5"
+  }
+}
