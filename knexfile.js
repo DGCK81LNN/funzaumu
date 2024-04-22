@@ -1,10 +1,12 @@
-import type { Knex } from "knex"
+/** @type {import("knex").Knex.Config} */
 export default {
-  client: "sqlite",
+  debug: true,
+  client: "better-sqlite3",
   connection: {
     filename: "./database/data.db",
   },
   migrations: {
     directory: "./database/migrations",
   },
-} as Knex.Config
+  useNullAsDefault: true,
+}
