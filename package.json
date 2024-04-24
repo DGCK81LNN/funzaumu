@@ -7,7 +7,8 @@
     "dev": "nuxt dev --port 3001",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "knex": "cross-env NODE_OPTIONS='--loader ts-node/esm' knex"
   },
   "dependencies": {
     "@bootstrap-vue-next/nuxt": "^0.17.2",
@@ -15,6 +16,7 @@
     "better-sqlite3": "^9.5.0",
     "bootstrap": "^5.3.3",
     "bootstrap-vue-next": "^0.17.2",
+    "cross-env": "^7.0.3",
     "from-exponential": "^1.1.1",
     "knex": "^3.1.0",
     "objection": "^3.1.4",
