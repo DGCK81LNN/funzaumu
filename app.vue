@@ -1,5 +1,5 @@
 <template>
-  <div class="m-2">
-    <BCard>why</BCard>
-  </div>
+  <NuxtLayout>
+    <NuxtPage />
+  </NuxtLayout>
 </template>

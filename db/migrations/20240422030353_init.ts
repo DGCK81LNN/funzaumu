@@ -4,11 +4,6 @@ export async function up(knex: Knex): Promise<void> {
   await knex.schema
     .createTable("funzaumu", (table) => {
       table.increments("id").primary()
-      table
-        .integer("revision_id")
-        .references("id")
-        .inTable("revision")
-        .onDelete("restrict")
       table.string("code")
       table.string("name")
       table.string("chat")
@@ -30,16 +25,17 @@ export async function up(knex: Knex): Promise<void> {
         .notNullable()
         .references("id")
         .inTable("funzaumu")
-        .onDelete("restrict")
+        .onDelete("cascade")
       table
         .integer("field_id")
         .notNullable()
         .references("id")
         .inTable("field")
-        .onDelete("restrict")
+        .onDelete("cascade")
       table.string("value").notNullable()
       table
         .integer("user_id")
+        .nullable()
         .references("id")
         .inTable("user")
         .onDelete("set null")

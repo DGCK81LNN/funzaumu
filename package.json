@@ -8,7 +8,7 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "knex": "cross-env NODE_OPTIONS='--loader ts-node/esm' knex"
+    "knex": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" knex"
   },
   "dependencies": {
     "@bootstrap-vue-next/nuxt": "^0.17.2",

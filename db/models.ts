@@ -1,4 +1,4 @@
-import { Model } from "objection"
+import { Model, fn, type Modifiers, type Pojo } from "objection"
 
 export class Funzaumu extends Model {
   static tableName = "funzaumu"
@@ -8,16 +8,55 @@ export class Funzaumu extends Model {
         relation: Model.HasManyRelation,
         modelClass: Revision,
         join: {
-          from: "funzaumu.revision_id",
-          to: "revision.id",
+          from: "funzaumu.id",
+          to: "revision.funzaumu_id",
         },
+      },
+      latestRevisions: {
+        relation: Model.HasManyRelation,
+        modelClass: Revision,
+        join: {
+          from: "funzaumu.id",
+          to: "revision.funzaumu_id",
+        },
+        modify: "latestOfEachField",
       },
     }
   }
+
+  declare id: number
+  declare code: string
+  declare name: string
+  declare chat: string
+  declare han: string
+  declare revisions: Revision[]
+  declare latestRevisions: Revision[]
 }
 
 export class Field extends Model {
   static tableName = "field"
+
+  declare id: number
+  declare index: number
+  declare name: string
+  declare label: string
+  declare comment: string
+  declare type: string
+  declare type_info: {
+    options?: { value: string; label: string }[]
+    default?: string
+  }
+
+  $parseDatabaseJson(o: Pojo) {
+    super.$parseDatabaseJson(o)
+    try {
+      o.type_info = o.type_info ? JSON.parse(o.type_info) : null
+    } catch (e) {
+      console.error(e)
+      o.type_info = null
+    }
+    return o
+  }
 }
 
 export class Revision extends Model {
@@ -50,6 +89,27 @@ export class Revision extends Model {
       },
     }
   }
+  static get modifiers(): Modifiers {
+    return {
+      latestOfEachField(builder) {
+        if (!builder.hasSelects()) builder.select("*")
+        builder
+          .select({ timestamp: fn.max(Revision.ref("timestamp")) })
+          .groupBy("field_id")
+      },
+    }
+  }
+
+  declare id: number
+  declare funzaumu_id: number
+  declare field_id: number
+  declare value: string
+  declare user_id: number
+  declare timestamp: number
+  declare summary: string
+  declare funzaumu: Funzaumu
+  declare field: Field
+  declare user: User
 }
 
 export class User extends Model {
@@ -66,4 +126,9 @@ export class User extends Model {
       },
     }
   }
+
+  declare id: number
+  declare name: string
+  declare email: string
+  declare revisions: Revision[]
 }

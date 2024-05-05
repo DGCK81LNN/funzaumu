@@ -104,7 +104,7 @@ export async function seed(knex: Knex): Promise<void> {
       name: "block",
       label: "区段 Block",
       type: "property",
-      type_info: JSON.stringify({
+      type_info: {
         options: [
           {
             value: "",
@@ -115,7 +115,7 @@ export async function seed(knex: Knex): Promise<void> {
             label: `${hex(index << 6)}-${hex(index === 0 ? 47 : (index << 6) | 63)}. ${name}`,
           })),
         ],
-      }),
+      },
     },
     {
       index: 91,
@@ -144,5 +144,6 @@ export async function seed(knex: Knex): Promise<void> {
   ]
 
   await Field.query(knex).delete()
+  await knex.table("sqlite_sequence").delete().where("name", "field")
   for (const field of fields) await Field.query(knex).insert(field)
 }
