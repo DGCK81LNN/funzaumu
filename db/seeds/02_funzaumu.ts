@@ -1,9 +1,8 @@
 import { readFile } from "fs/promises"
 import type { Knex } from "knex"
-import type { PartialModelObject } from "objection"
 import { dirname, resolve } from "path"
 import { fileURLToPath } from "url"
-import { Field, Funzaumu, Revision } from "../models.ts"
+import { Field, Funzaumu, Revision } from "../models.js"
 
 export async function seed(knex: Knex): Promise<void> {
   const _dirname = dirname(fileURLToPath(import.meta.url))
@@ -22,7 +21,7 @@ export async function seed(knex: Knex): Promise<void> {
   const fields: Record<string, number | null> = {}
   for (const colName of head) {
     const f = await Field.query(knex).findOne({ name: colName })
-    console.log(f)
+    //console.log(f)
     fields[colName] = f?.id ?? null
   }
 

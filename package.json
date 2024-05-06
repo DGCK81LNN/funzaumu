@@ -1,11 +1,11 @@
 {
-  "name": "funzaumu.vudrux.site",
+  "name": "funzaumu",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
+    "postbuild": "node bin/postbuild.js",
     "dev": "nuxt dev --port 3001",
-    "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "knex": "cross-env NODE_OPTIONS=\"--loader ts-node/esm\" knex"

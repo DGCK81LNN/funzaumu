@@ -1,0 +1,7 @@
+{
+  "include": ["db/**/*.ts", "knexfile.ts"],
+  "compilerOptions": {
+    "outDir": ".output/server",
+    "module": "Node16"
+  }
+}

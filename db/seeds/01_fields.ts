@@ -1,6 +1,6 @@
 import { toBb26 } from "bb26"
 import type { Knex } from "knex"
-import { Field } from "../models.ts"
+import { Field } from "../models.js"
 import type { PartialModelObject } from "objection"
 
 function hex(n: number) {
