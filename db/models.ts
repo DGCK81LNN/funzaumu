@@ -41,11 +41,17 @@ export class Field extends Model {
   declare name: string
   declare label: string
   declare comment: string
-  declare type: string
+  declare type: "mapping" | "notation" | "glyph" | "image" | "property" | "text"
   declare type_info: {
-    options?: { value: string; label: string }[]
+    // general
+    pattern?: string
     default?: string
-  }
+    // glyphs
+    glyphDrawingMode?: "vector" | "line"
+    glyphGuides?: string // xegoe, handwriting, hanzi
+    // properties
+    options?: { value: string; label: string }[]
+  } | null
 
   $parseDatabaseJson(o: Pojo) {
     super.$parseDatabaseJson(o)
