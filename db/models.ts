@@ -1,4 +1,5 @@
 import { Model, fn, type Modifiers, type Pojo } from "objection"
+import type { JSONSchema7 } from "json-schema"
 
 export class Funzaumu extends Model {
   static tableName = "funzaumu"
@@ -41,7 +42,15 @@ export class Field extends Model {
   declare name: string
   declare label: string
   declare comment: string
-  declare type: "mapping" | "notation" | "glyph" | "image" | "property" | "text"
+  declare type:
+    | "mapping"
+    | "notation"
+    | "glyph"
+    | "image"
+    | "property"
+    | "text"
+    | "json"
+    | "label"
   declare type_info: {
     // general
     pattern?: string
@@ -51,6 +60,10 @@ export class Field extends Model {
     glyphGuides?: string // xegoe, handwriting, hanzi
     // properties
     options?: { value: string; label: string }[]
+    // json
+    schema?: JSONSchema7
+    // labels
+    labelRole?: "h2" | "h3" | "h4" | "h5"
   } | null
 
   $parseDatabaseJson(o: Pojo) {

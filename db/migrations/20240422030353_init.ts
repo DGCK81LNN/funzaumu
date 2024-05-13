@@ -11,7 +11,7 @@ export async function up(knex: Knex): Promise<void> {
     })
     .createTable("field", (table) => {
       table.increments("id").primary()
-      table.double("index")
+      table.float("index")
       table.string("name")
       table.string("label")
       table.string("comment")

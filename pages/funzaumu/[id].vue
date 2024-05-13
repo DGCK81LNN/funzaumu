@@ -11,6 +11,7 @@ const fields = computed<TableFieldRaw<(typeof data.value & {})["fields"][0]>[]>(
       key: "label",
       label: t("property"),
       tdAttr: (_v, _k, item) => ({ title: item.comment }),
+      tdClass: ["soul-font-g"],
     },
     {
       key: "value",
@@ -22,6 +23,7 @@ const fields = computed<TableFieldRaw<(typeof data.value & {})["fields"][0]>[]>(
         }
         return {}
       },
+      tdClass: ["soul-font-g"],
       formatter: (v, _k, item) => {
         if (item.type_info?.options) {
           const option = item.type_info.options.find((o) => o.value === v)
@@ -55,7 +57,7 @@ useHead({ title })
 
 <template>
   <div>
-    <h1>{{ title }}</h1>
+    <h1 class="soul-font-g">{{ title }}</h1>
     <BTable :fields="fields" :items="data?.fields" />
   </div>
 </template>

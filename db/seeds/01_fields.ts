@@ -28,6 +28,14 @@ export async function seed(knex: Knex): Promise<void> {
 
   const fields: PartialModelObject<Field>[] = [
     {
+      index: 0,
+      label: "基本信息 Basic Info",
+      type: "label",
+      type_info: {
+        labelRole: "h2",
+      },
+    },
+    {
       index: 1,
       name: "code",
       label: "编号 Code",
@@ -64,6 +72,14 @@ export async function seed(knex: Knex): Promise<void> {
       type: "notation",
     },
     {
+      index: 10,
+      label: "字形 Glyphs",
+      type: "label",
+      type_info: {
+        labelRole: "h3",
+      },
+    },
+    {
       index: 11,
       name: "upper_glyph",
       label: "大写字形 Upper case glyph",
@@ -88,6 +104,26 @@ export async function seed(knex: Knex): Promise<void> {
       type: "glyph",
     },
     {
+      index: 19,
+      name: "sketch",
+      label: "字形示意 Glyph sketch",
+      type: "glyph",
+    },
+    {
+      index: 19.1,
+      name: "img",
+      label: "参考图片 Reference image",
+      type: "image",
+    },
+    {
+      index: 20,
+      label: "读音 Sounds",
+      type: "label",
+      type_info: {
+        labelRole: "h3",
+      },
+    },
+    {
       index: 21,
       name: "reading",
       label: "呼读音 Reading",
@@ -100,9 +136,17 @@ export async function seed(knex: Knex): Promise<void> {
       type: "notation",
     },
     {
+      index: 30,
+      label: "扩展信息 Extra Info",
+      type: "label",
+      type_info: {
+        labelRole: "h2",
+      },
+    },
+    {
       index: 31,
-      name: "block",
-      label: "区段 Block",
+      name: "page",
+      label: "编码页 Encoding page",
       type: "property",
       type_info: {
         options: [
@@ -124,22 +168,117 @@ export async function seed(knex: Knex): Promise<void> {
       type: "text",
     },
     {
+      index: 100,
+      label: "扩展信息 Extra Info",
+      type: "label",
+      type_info: {
+        labelRole: "h2",
+      },
+    },
+    {
+      index: 100.01,
+      label: "第二字形 Alt glyphs",
+      comment:
+        "第二大、小、中、汉写与聊天字母不必全部存在，也不必严格对应。Alt upper / lower / middle / hanzi case and chat letter are not required to all exist or match each other as a distinct set.",
+      type: "label",
+      type_info: {
+        labelRole: "h3",
+      },
+    },
+    {
       index: 101,
-      name: "upper_script",
-      label: "大写手写体 Upper case script",
+      name: "alt_upper_glyph",
+      label: "第二大写字形 Alt upper case glyph",
       type: "glyph",
     },
     {
       index: 102,
-      name: "lower_script",
-      label: "小写手写体 Lower case script",
+      name: "alt_lower_glyph",
+      label: "第二小写字形 Alt lower case glyph",
       type: "glyph",
     },
     {
       index: 103,
-      name: "middle_script",
-      label: "中写手写体 Middle case script",
+      name: "alt_middle_glyph",
+      label: "第二中写字形 Alt middle case glyph",
       type: "glyph",
+    },
+    {
+      index: 104,
+      name: "alt_han_glyph",
+      label: "第二汉写字形 Alt hanzi case glyph",
+      type: "glyph",
+    },
+    {
+      index: 107,
+      name: "alt_chat",
+      label: "第二聊天字母 Alt chat letter",
+      type: "notation",
+    },
+    {
+      index: 108,
+      name: "alt_han",
+      label: "第二汉写 Alt hanzi case",
+      type: "notation",
+    },
+    {
+      index: 108.1,
+      name: "alt_han_ids",
+      label: "第二汉写 IDS / Alt hanzi case IDS",
+      type: "notation",
+    },
+    {
+      index: 109,
+      name: "alt_sketch",
+      label: "第二字形示意 Alt glyph sketch",
+      type: "glyph",
+    },
+    {
+      index: 109.1,
+      name: "alt_img",
+      label: "第二字形参考图片 Alt glyph reference image",
+      type: "image",
+    },
+    {
+      index: 110,
+      label: "形近替代字 Unicode Approximates",
+      type: "label",
+      type_info: {
+        labelRole: "h3",
+      },
+    },
+    {
+      index: 111,
+      name: "unicode_approx",
+      label: "形近替代字 Unicode Approximates",
+      type: "json",
+      type_info: {
+        schema: {
+          type: "array",
+          items: {
+            type: "object",
+            properties: {
+              value: {
+                title: "字符",
+                type: "string",
+              },
+              category: {
+                title: "类型",
+                enum: ["capital", "small", "han"],
+              },
+              traits: {
+                title: "标签",
+                type: "array",
+                items: {
+                  type: "string",
+                },
+                uniqueItems: true,
+              },
+            },
+            required: ["value", "category"],
+          },
+        },
+      },
     },
   ]
 
