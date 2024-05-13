@@ -1,7 +1,8 @@
 import { toBb26 } from "bb26"
 import type { Knex } from "knex"
-import { Field } from "../models.js"
 import type { PartialModelObject } from "objection"
+import { Field } from "../models.js"
+import { unicodeApproxSchema } from "../schemas.js"
 
 function hex(n: number) {
   return n.toString(16).toUpperCase().padStart(2, "0")
@@ -102,6 +103,7 @@ export async function seed(knex: Knex): Promise<void> {
       name: "han_glyph",
       label: "汉写字形 Hanzi case glyph",
       type: "glyph",
+      type_info: { glyphCategory: "hanzi" },
     },
     {
       index: 19,
@@ -208,6 +210,7 @@ export async function seed(knex: Knex): Promise<void> {
       name: "alt_han_glyph",
       label: "第二汉写字形 Alt hanzi case glyph",
       type: "glyph",
+      type_info: { glyphCategory: "hanzi" },
     },
     {
       index: 107,
@@ -253,33 +256,73 @@ export async function seed(knex: Knex): Promise<void> {
       label: "形近替代字 Unicode Approximates",
       type: "json",
       type_info: {
-        schema: {
-          type: "array",
-          items: {
-            type: "object",
-            properties: {
-              value: {
-                title: "字符",
-                type: "string",
-              },
-              category: {
-                title: "类型",
-                enum: ["capital", "small", "han"],
-              },
-              traits: {
-                title: "标签",
-                type: "array",
-                items: {
-                  type: "string",
-                },
-                uniqueItems: true,
-              },
-            },
-            required: ["value", "category"],
-          },
-        },
+        schema: unicodeApproxSchema,
       },
     },
+    {
+      index: 1000,
+      label: "更多字形 More Glyphs",
+      type: "label",
+      type_info: {
+        labelRole: "h3",
+      },
+    },
+    {
+      index: 1001,
+      name: "script_upper_glyph",
+      label: "手写大写字形 Handwritten upper case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1002,
+      name: "script_lower_glyph",
+      label: "手写小写字形 Handwritten lower case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1003,
+      name: "script_middle_glyph",
+      label: "手写中写字形 Handwritten middle case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1004,
+      name: "script_han_glyph",
+      label: "手写汉写字形 Handwritten hanzi case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "hanzi" },
+    },
+    {
+      index: 1011,
+      name: "alt_script_upper_glyph",
+      label: "第二手写大写字形 Alt handwritten upper case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1012,
+      name: "alt_script_lower_glyph",
+      label: "第二手写小写字形 Alt handwritten lower case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1013,
+      name: "alt_script_middle_glyph",
+      label: "第二手写中写字形 Alt handwritten middle case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "handwriting" },
+    },
+    {
+      index: 1014,
+      name: "alt_script_han_glyph",
+      label: "第二手写汉写字形 Alt handwritten hanzi case glyph",
+      type: "glyph",
+      type_info: { glyphDrawingMode: "line", glyphCategory: "hanzi" },
+    }
   ]
 
   await Field.query(knex).delete()

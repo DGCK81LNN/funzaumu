@@ -1,5 +1,5 @@
 import { Model, fn, type Modifiers, type Pojo } from "objection"
-import type { JSONSchema7 } from "json-schema"
+import type { JSONSchema } from "json-schema-to-ts"
 
 export class Funzaumu extends Model {
   static tableName = "funzaumu"
@@ -57,11 +57,11 @@ export class Field extends Model {
     default?: string
     // glyphs
     glyphDrawingMode?: "vector" | "line"
-    glyphGuides?: string // xegoe, handwriting, hanzi
+    glyphCategory?: string // handwriting, hanzi
     // properties
     options?: { value: string; label: string }[]
     // json
-    schema?: JSONSchema7
+    schema?: JSONSchema
     // labels
     labelRole?: "h2" | "h3" | "h4" | "h5"
   } | null
