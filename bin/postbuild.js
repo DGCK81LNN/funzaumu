@@ -31,10 +31,11 @@ await writeFile(
 console.log("+ tsc db scripts")
 await new Promise((resolve, reject) => {
   spawn(
-    process.platform === "win32" ? "npx.cmd" : "npx",
+    process.platform === "win32" ? "yarn.cmd" : "yarn",
     ["tsc", "--project", "tsconfig.db-scripts.json"],
     {
       stdio: "inherit",
+      shell: true,
     },
   )
     .on("close", (c, s) =>
